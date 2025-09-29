@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Marketing with Nikhil — Digital Marketing Agency</title>
+  <style>
+    /* ============ Reset & base ============ */
+    * { box-sizing: border-box; }
+    html,body { margin:0; padding:0; font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; color:#222; }
+    a { color: inherit; text-decoration: none; }
+    img { display:block; max-width:100%; height:auto; }
+
+    /* ============ Header ============ */
+    header.site-header {
+      background: #ffffff;
+      border-bottom: 1px solid #e1e1e1;
+      position: sticky;
+      top:0;
+      z-index: 60;
+    }
+    .container { max-width:1200px; margin:0 auto; padding:0 20px; }
+
+    .header-inner {
+      display:flex;
+      align-items:center;
+      justify-content:center; /* center title */
+      height:84px;
+      position:relative;
+    }
+    .site-logo {
+      position:absolute;
+      left:20px;
+      top:50%;
+      transform: translateY(-50%);
+      display:flex;
+      align-items:center;
+      gap:12px;
+    }
+    .site-logo img { width:260px; height:72px; object-fit:contain; } /* wider logo, controlled height */
+    .site-title {
+      text-align:center;
+      line-height:1;
+    }
+    .site-title h1 { margin:0; font-size:20px; letter-spacing:0.6px; color:#0f1724; font-weight:700; }
+    .site-title p { margin:4px 0 0 0; font-size:13px; color:#667085; }
+
+    /* ============ Nav ============ */
+    nav.main-nav {
+      display:flex;
+      justify-content:center;
+      gap:18px;
+      padding:12px 0;
+      background:#2f3b4a;
+      border-bottom:3px solid #bdbdbd; /* grey border requested */
+    }
+    nav.main-nav a {
+      color:#fff; padding:10px 14px; text-transform:uppercase; font-weight:600; font-size:12px; letter-spacing:0.6px; border-radius:4px;
+    }
+    nav.main-nav a:hover { background: rgba(255,255,255,0.08); }
+
+    /* small space between nav and hero (we already have border + small gap) */
+    .nav-gap { height:10px; background:transparent; }
+
+    /* ============ Hero ============ */
+    .hero {
+      background-image: url('Digital.png');
+      background-size: cover;
+      background-position: center;
+      min-height:440px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      position:relative;
+      color:#fff;
+      text-align:center;
+    }
+    .hero::before {
+      content:""; position:absolute; inset:0; background:linear-gradient(180deg, rgba(0,0,0,0.45), rgba(0,0,0,0.55));
+    }
+    .hero-inner { position:relative; z-index:2; max-width:980px; padding:60px 20px; }
+    .hero h2 { font-size:36px; margin:0 0 12px 0; line-height:1.05; }
+    .hero p.lead { margin:0 0 24px 0; font-size:18px; color:rgba(255,255,255,0.92); }
+    .hero .cta { display:inline-block; background:#0ea5a4; color:#052024; padding:14px 22px; border-radius:8px; font-weight:700; box-shadow:0 6px 20px rgba(14,165,164,0.18); }
+
+    /* ============ Sections ============ */
+    section { padding:64px 0; }
+    .section-title { text-align:center; margin-bottom:34px; }
+    .section-title h3 { margin:0; font-size:22px; color:#0f1724; }
+    .section-title p { margin:8px 0 0 0; color:#6b7280; }
+
+    /* Services */
+    .services { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:18px; max-width:1100px; margin:0 auto; }
+    .service-card {
+      background:#fff; border:1px solid #e6e6e6; padding:20px; border-radius:10px; min-height:160px;
+      display:flex; flex-direction:column; gap:10px;
+      transition: transform .18s ease, box-shadow .18s ease;
+    }
+    .service-card:hover { transform: translateY(-6px); box-shadow:0 8px 30px rgba(16,24,40,0.06); }
+    .service-card h4 { margin:0; font-size:16px; color:#0f1724; }
+    .service-card p { margin:0; color:#6b7280; font-size:14px; flex:1; }
+
+    /* Portfolio */
+    .portfolio-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:14px; max-width:1100px; margin:0 auto; }
+    .work { position:relative; overflow:hidden; border-radius:8px; border:1px solid #eaeaea; background:#f8fafc; }
+    .work img { width:100%; height:220px; object-fit:cover; display:block; }
+    .work .meta { padding:12px; }
+    .work h5 { margin:0 0 6px 0; font-size:15px; }
+    .work p { margin:0; color:#6b7280; font-size:13px; }
+
+    /* Testimonials */
+    .testimonials { max-width:900px; margin:0 auto; display:grid; gap:16px; grid-template-columns:1fr; }
+    .testi { background:#fff; border-radius:10px; padding:18px; border:1px solid #e6e6e6; }
+
+    /* Blog previews */
+    .blogs { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:16px; max-width:1100px; margin:0 auto; }
+    .blog-card { background:#fff; border-radius:10px; overflow:hidden; border:1px solid #e6e6e6; }
+
+    /* Contact */
+    .contact-wrap { max-width:900px; margin:0 auto; display:grid; grid-template-columns:1fr 360px; gap:20px; }
+    .contact-form { background:#fff; padding:20px; border-radius:10px; border:1px solid #e6e6e6; }
+    .contact-form label { display:block; font-size:13px; margin-bottom:6px; color:#374151; }
+    .contact-form input, .contact-form textarea { width:100%; padding:10px 12px; border-radius:8px; border:1px solid #d1d5db; margin-bottom:12px; font-size:14px; }
+    .contact-form button { background:#0ea5a4; color:#052024; padding:12px 16px; border-radius:8px; border:0; font-weight:700; cursor:pointer; }
+
+    .contact-info { background:#f8fafc; padding:20px; border-radius:10px; border:1px solid #e6e6e6; }
+
+    /* Footer */
+    footer.site-footer { background:#0b1220; color:#9aa6b2; padding:36px 0; }
+    footer .footer-inner { display:flex; gap:24px; flex-wrap:wrap; align-items:flex-start; justify-content:space-between; }
+
+    /* Responsive tweaks */
+    @media (max-width:900px){
+      .contact-wrap { grid-template-columns:1fr; }
+      .site-logo img { width:200px; height:60px; }
+      .hero { min-height:360px; padding:36px 0; }
+      header .header-inner { height:76px; }
+    }
+    @media (max-width:520px){
+      .site-logo img { width:160px; height:56px; }
+      nav.main-nav { gap:10px; padding:10px 12px; }
+      .hero h2 { font-size:26px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="site-logo">
+        <!-- Put your logo file in same folder as this file named "Logo.png" -->
+        <img src="Logo.png" alt="Marketing with Nikhil Logo">
+      </div>
+
+      <div class="site-title" aria-label="Marketing with Nikhil">
+        <h1>Marketing with Nikhil</h1>
+        <p>Your Partner in Digital Growth</p>
+      </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="main-nav" role="navigation" aria-label="Main navigation">
+      <a href="#home">Home</a>
+      <a href="#services">Our Services</a>
+      <a href="#portfolio">Portfolio</a>
+      <a href="#blog">Blog</a>
+      <a href="#contact">Contact Us</a>
+    </nav>
+
+    <!-- small gap (visual spacing) -->
+    <div class="nav-gap"></div>
+  </header>
+
+  <!-- Hero -->
+  <main id="home">
+    <section class="hero" aria-label="Hero section">
+      <div class="hero-inner container">
+        <h2>Smart digital marketing that grows real businesses.</h2>
+        <p class="lead">SEO, social campaigns, content & branding tailored to your audience. We build measurable campaigns that convert.</p>
+        <a class="cta" href="#contact">Book a Free Consultation</a>
+      </div>
+    </section>
+
+    <!-- Services -->
+    <section id="services">
+      <div class="container">
+        <div class="section-title">
+          <h3>Services</h3>
+          <p>Full-stack digital marketing services to boost visibility, leads and revenue.</p>
+        </div>
+
+        <div class="services" aria-hidden="false">
+          <div class="service-card">
+            <h4>Search Engine Optimization (SEO)</h4>
+            <p>On-page, technical SEO and local search strategies that increase organic traffic and qualified leads.</p>
+          </div>
+
+          <div class="service-card">
+            <h4>Paid Media (PPC)</h4>
+            <p>High-ROI paid campaigns on Google, YouTube and social platforms with conversion-focused optimization.</p>
+          </div>
+
+          <div class="service-card">
+            <h4>Social Media & Content</h4>
+            <p>Creative content, community growth and paid social that builds brand awareness and drives actions.</p>
+          </div>
+
+          <div class="service-card">
+            <h4>Branding & Design</h4>
+            <p>Logo refresh, visual systems and assets that make your brand consistent and memorable.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Portfolio -->
+    <section id="portfolio">
+      <div class="container">
+        <div class="section-title">
+          <h3>Selected Work</h3>
+          <p>Campaigns, websites, and branding done for our clients.</p>
+        </div>
+
+        <div class="portfolio-grid">
+          <!-- Replace src with real images in your folder -->
+          <article class="work">
+            <img src="portfolio-1.jpg" alt="Project 1 — Example">
+            <div class="meta">
+              <h5>Brand Launch — Local Auto Dealer</h5>
+              <p>Full funnel campaign that increased demo requests by 48%.</p>
+            </div>
+          </article>
+
+          <article class="work">
+            <img src="portfolio-2.jpg" alt="Project 2">
+            <div class="meta">
+              <h5>SEO & Content — Service Business</h5>
+              <p>Organic sessions up 120% in 6 months through content & on-site fixes.</p>
+            </div>
+          </article>
+
+          <article class="work">
+            <img src="portfolio-3.jpg" alt="Project 3">
+            <div class="meta">
+              <h5>Paid Ads — Ecommerce</h5>
+              <p>ROAS improved from 1.8x to 4.2x via creative testing.</p>
+            </div>
+          </article>
+
+          <article class="work">
+            <img src="portfolio-4.jpg" alt="Project 4">
+            <div class="meta">
+              <h5>Website & UX</h5>
+              <p>Landing redesign that increased lead conversion rate by 37%.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section aria-label="Testimonials">
+      <div class="container">
+        <div class="section-title">
+          <h3>What Clients Say</h3>
+          <p>Real results, real businesses.</p>
+        </div>
+
+        <div class="testimonials">
+          <div class="testi">
+            <strong>Ravi K.</strong>
+            <p style="color:#374151; margin-top:8px;">"Nikhil's team delivered above expectations — traffic and leads improved, and communication was great."</p>
+          </div>
+          <div class="testi">
+            <strong>Anita S.</strong>
+            <p style="color:#374151; margin-top:8px;">"Professional and measurable — excellent attention to detail in our campaigns."</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Blog previews -->
+    <section id="blog">
+      <div class="container">
+        <div class="section-title">
+          <h3>From the Blog</h3>
+          <p>Insights and tips on digital marketing.</p>
+        </div>
+
+        <div class="blogs">
+          <article class="blog-card">
+            <img src="blog-1.jpg" alt="Blog 1">
+            <div style="padding:14px;">
+              <h4 style="margin:0 0 6px 0;">7 SEO Tips for Small Businesses</h4>
+              <p style="margin:0;color:#6b7280;font-size:14px;">Practical SEO improvements you can make this week.</p>
+            </div>
+          </article>
+
+          <article class="blog-card">
+            <img src="blog-2.jpg" alt="Blog 2">
+            <div style="padding:14px;">
+              <h4 style="margin:0 0 6px 0;">How to Run High-ROI Ads</h4>
+              <p style="margin:0;color:#6b7280;font-size:14px;">A framework for testing creative and audiences.</p>
+            </div>
+          </article>
+
+          <article class="blog-card">
+            <img src="blog-3.jpg" alt="Blog 3">
+            <div style="padding:14px;">
+              <h4 style="margin:0 0 6px 0;">Branding Basics</h4>
+              <p style="margin:0;color:#6b7280;font-size:14px;">Build a visual system that lasts.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact">
+      <div class="container">
+        <div class="section-title">
+          <h3>Contact Us</h3>
+          <p>Let's talk about growing your business.</p>
+        </div>
+
+        <div class="contact-wrap">
+          <form class="contact-form" id="contactForm" onsubmit="submitContact(event)">
+            <label for="name">Full name</label>
+            <input id="name" name="name" type="text" required>
+
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" required>
+
+            <label for="message">Message</label>
+            <textarea id="message" name="message" rows="6" required></textarea>
+
+            <button type="submit">Send Message</button>
+            <p id="formStatus" style="margin-top:10px;color:#065f46;display:none;"></p>
+          </form>
+
+          <aside class="contact-info" aria-label="Contact information">
+            <h4 style="margin-top:0;">Get in touch</h4>
+            <p style="margin:8px 0;">Email: <a href="mailto:hello@marketingwithnikhil.com">hello@marketingwithnikhil.com</a></p>
+            <p style="margin:8px 0;">Phone: +91 90000 00000</p>
+            <p style="margin:8px 0;">Location: Pune, Maharashtra, India</p>
+            <div style="margin-top:18px;">
+              <strong>Working process</strong>
+              <ol style="padding-left:18px; color:#6b7280; margin:8px 0;">
+                <li>Discovery</li>
+                <li>Strategy</li>
+                <li>Execution</li>
+                <li>Optimize</li>
+              </ol>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div style="max-width:420px;">
+        <img src="Logo.png" alt="Marketing with Nikhil" style="width:160px;height:auto;margin-bottom:12px;">
+        <p style="color:#9aa6b2;margin:0;">Marketing with Nikhil — full-service digital marketing tailored for small & medium businesses.</p>
+      </div>
+
+      <div style="flex:1; display:flex; justify-content:flex-end; align-items:flex-start;">
+        <div>
+          <h4 style="color:#fff;margin:0 0 8px 0;">Quick links</h4>
+          <nav style="display:flex; gap:12px; flex-wrap:wrap;">
+            <a href="#services" style="color:#9aa6b2;">Services</a>
+            <a href="#portfolio" style="color:#9aa6b2;">Portfolio</a>
+            <a href="#contact" style="color:#9aa6b2;">Contact</a>
+          </nav>
+          <p style="margin-top:16px;color:#9aa6b2;font-size:13px;">© <span id="year"></span> Marketing with Nikhil</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // set footer year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Simple client-side form handler (replace with backend)
+    function submitContact(e){
+      e.preventDefault();
+      const status = document.getElementById('formStatus');
+      status.style.display = 'block';
+      status.textContent = 'Sending...';
+
+      // simulate sending
+      setTimeout(() => {
+        status.textContent = 'Thanks! Your message has been received. I will contact you soon.';
+        e.target.reset();
+      }, 800);
+    }
+  </script>
+</body>
+</html>
